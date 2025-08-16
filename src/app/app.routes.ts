@@ -3,6 +3,8 @@ import { HomeComponent } from "./pages/home/home.component";
 import { PlaceholderComponent } from "./pages/placeholder/placeholder.component";
 import { SearchComponent } from "./pages/search/search.component";
 import { CartComponent } from "./pages/cart/cart.component";
+import { LoginComponent } from "./pages/auth/login.component";
+import { SignupComponent } from "./pages/auth/signup.component";
 
 export const routes: Routes = [
   {
