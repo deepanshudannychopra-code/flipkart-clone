@@ -5,6 +5,8 @@ import { SearchComponent } from "./pages/search/search.component";
 import { CartComponent } from "./pages/cart/cart.component";
 import { LoginComponent } from "./pages/auth/login.component";
 import { SignupComponent } from "./pages/auth/signup.component";
+import { CheckoutComponent } from "./pages/checkout/checkout.component";
+import { PaymentComponent } from "./pages/payment/payment.component";
 
 export const routes: Routes = [
   {
