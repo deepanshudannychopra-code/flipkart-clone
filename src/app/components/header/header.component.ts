@@ -295,4 +295,10 @@ export class HeaderComponent {
       this.router.navigate(['/search'], { queryParams: { q: query } });
     }
   }
+
+  logout() {
+    this.authService.logout();
+    this.showUserMenu.set(false);
+    this.router.navigate(['/']);
+  }
 }
