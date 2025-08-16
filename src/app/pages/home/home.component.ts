@@ -47,36 +47,6 @@ import { Product, Banner, Category } from '../../models/product.model';
                   </div>
                 </div>
               }
-              
-              <!-- Banner Navigation Dots -->
-              <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                @for (banner of banners(); track banner.id; let i = $index) {
-                  <button
-                    (click)="currentBannerIndex.set(i)"
-                    class="w-3 h-3 rounded-full transition-colors"
-                    [class.bg-white]="currentBannerIndex() === i"
-                    [class.bg-white/50]="currentBannerIndex() !== i"
-                  ></button>
-                }
-              </div>
-
-              <!-- Banner Navigation Arrows -->
-              <button
-                (click)="previousBanner()"
-                class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-2 rounded-full transition-colors"
-              >
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-              </button>
-              <button
-                (click)="nextBanner()"
-                class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-2 rounded-full transition-colors"
-              >
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
-                </svg>
-              </button>
             </div>
           }
         </div>
@@ -212,7 +182,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.loadData();
-    this.startBannerRotation();
   }
 
   private loadData() {
@@ -237,26 +206,5 @@ export class HomeComponent implements OnInit {
       this.trendingProducts.set(products);
       this.loadingTrending.set(false);
     });
-  }
-
-  private startBannerRotation() {
-    setInterval(() => {
-      this.nextBanner();
-    }, 5000); // Change banner every 5 seconds
-  }
-
-  nextBanner() {
-    const banners = this.banners();
-    if (banners.length > 0) {
-      this.currentBannerIndex.set((this.currentBannerIndex() + 1) % banners.length);
-    }
-  }
-
-  previousBanner() {
-    const banners = this.banners();
-    if (banners.length > 0) {
-      const newIndex = this.currentBannerIndex() - 1;
-      this.currentBannerIndex.set(newIndex < 0 ? banners.length - 1 : newIndex);
-    }
   }
 }
