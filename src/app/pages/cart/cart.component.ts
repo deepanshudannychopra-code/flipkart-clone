@@ -239,9 +239,7 @@ import { CartItem } from "../../models/product.model";
                     >
                       <span>Savings</span>
                       <span
-                        >-₹{{
-                          formatPrice(cartService.totalSavings())
-                        }}</span
+                        >-₹{{ formatPrice(cartService.totalSavings()) }}</span
                       >
                     </div>
                   }

@@ -365,9 +365,7 @@ import { AuthService } from "../../services/auth.service";
                     >
                       <span>Savings</span>
                       <span
-                        >-₹{{
-                          formatPrice(cartService.totalSavings())
-                        }}</span
+                        >-₹{{ formatPrice(cartService.totalSavings()) }}</span
                       >
                     </div>
                   }
