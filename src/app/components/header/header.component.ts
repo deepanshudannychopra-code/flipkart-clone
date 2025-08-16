@@ -96,19 +96,49 @@ import { Category } from "../../models/product.model";
 
           <!-- User Actions -->
           <div class="flex items-center space-x-6">
-            <!-- Login -->
-            <button
-              class="flex items-center space-x-1 text-flipkart-blue font-medium hover:text-flipkart-blue/80"
-            >
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  fill-rule="evenodd"
-                  d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-              <span>Login</span>
-            </button>
+            <!-- Login/User Profile -->
+            @if (authService.loggedIn()) {
+              <div class="relative">
+                <button
+                  (click)="showUserMenu.set(!showUserMenu())"
+                  class="flex items-center space-x-2 text-flipkart-blue font-medium hover:text-flipkart-blue/80"
+                >
+                  <img
+                    [src]="authService.user()?.avatar || 'https://ui-avatars.com/api/?name=User&background=2874f0&color=fff'"
+                    [alt]="authService.user()?.name"
+                    class="w-6 h-6 rounded-full"
+                  >
+                  <span>{{ authService.user()?.name }}</span>
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                  </svg>
+                </button>
+
+                @if (showUserMenu()) {
+                  <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border z-50">
+                    <div class="py-1">
+                      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Profile</a>
+                      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Orders</a>
+                      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Coupons</a>
+                      <hr class="my-1">
+                      <button
+                        (click)="logout()"
+                        class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  </div>
+                }
+              </div>
+            } @else {
+              <a routerLink="/login" class="flex items-center space-x-1 text-flipkart-blue font-medium hover:text-flipkart-blue/80">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                </svg>
+                <span>Login</span>
+              </a>
+            }
 
             <!-- Wishlist -->
             <a
