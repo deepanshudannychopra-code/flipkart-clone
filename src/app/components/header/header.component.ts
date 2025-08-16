@@ -297,7 +297,7 @@ import { Category } from "../../models/product.model";
 export class HeaderComponent {
   private productService = inject(ProductService);
   private cartService = inject(CartService);
-  private authService = inject(AuthService);
+  authService = inject(AuthService);
   private router = inject(Router);
 
   searchQuery = signal("");
