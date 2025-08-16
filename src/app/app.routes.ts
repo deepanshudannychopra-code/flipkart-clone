@@ -24,7 +24,11 @@ export const routes: Routes = [
       suggestions: [
         { title: "Electronics", icon: "📱", link: "/category/electronics" },
         { title: "Fashion", icon: "👕", link: "/category/fashion" },
-        { title: "Home & Kitchen", icon: "���", link: "/category/home-kitchen" },
+        {
+          title: "Home & Kitchen",
+          icon: "���",
+          link: "/category/home-kitchen",
+        },
       ],
     },
   },
@@ -60,15 +64,15 @@ export const routes: Routes = [
   },
   {
     path: "cart",
-    component: CartComponent
+    component: CartComponent,
   },
   {
     path: "login",
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
     path: "signup",
-    component: SignupComponent
+    component: SignupComponent,
   },
   {
     path: "wishlist",
@@ -87,11 +91,11 @@ export const routes: Routes = [
   },
   {
     path: "checkout",
-    component: CheckoutComponent
+    component: CheckoutComponent,
   },
   {
     path: "payment",
-    component: PaymentComponent
+    component: PaymentComponent,
   },
   {
     path: "deals",
@@ -124,7 +128,7 @@ export const routes: Routes = [
   },
   {
     path: "search",
-    component: SearchComponent
+    component: SearchComponent,
   },
   {
     path: "**",

@@ -1,11 +1,16 @@
-import { Component, signal, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterLink, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
+import { Component, signal, inject } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { RouterLink, Router } from "@angular/router";
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from "@angular/forms";
+import { AuthService } from "../../services/auth.service";
 
 @Component({
-  selector: 'app-login',
+  selector: "app-login",
   standalone: true,
   imports: [CommonModule, RouterLink, ReactiveFormsModule],
   template: `
@@ -184,11 +189,13 @@ import { AuthService } from '../../services/auth.service';
       </div>
     </div>
   `,
-  styles: [`
-    code {
-      font-family: 'Courier New', Courier, monospace;
-    }
-  `]
+  styles: [
+    `
+      code {
+        font-family: "Courier New", Courier, monospace;
+      }
+    `,
+  ],
 })
 export class LoginComponent {
   private authService = inject(AuthService);
@@ -197,55 +204,56 @@ export class LoginComponent {
 
   loginForm: FormGroup;
   loading = signal(false);
-  error = signal('');
+  error = signal("");
   showPassword = signal(false);
 
   constructor() {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      remember: [false]
+      email: ["", [Validators.required, Validators.email]],
+      password: ["", [Validators.required, Validators.minLength(6)]],
+      remember: [false],
     });
   }
 
   onSubmit() {
     if (this.loginForm.valid) {
       this.loading.set(true);
-      this.error.set('');
+      this.error.set("");
 
       const credentials = {
         email: this.loginForm.value.email,
-        password: this.loginForm.value.password
+        password: this.loginForm.value.password,
       };
 
       this.authService.login(credentials).subscribe({
         next: (user) => {
           this.loading.set(false);
           // Redirect to the intended page or home
-          const returnUrl = new URLSearchParams(window.location.search).get('returnUrl') || '/';
+          const returnUrl =
+            new URLSearchParams(window.location.search).get("returnUrl") || "/";
           this.router.navigate([returnUrl]);
         },
         error: (error) => {
           this.loading.set(false);
-          this.error.set(error.message || 'Login failed. Please try again.');
-        }
+          this.error.set(error.message || "Login failed. Please try again.");
+        },
       });
     }
   }
 
   forgotPassword() {
-    const email = this.loginForm.get('email')?.value;
+    const email = this.loginForm.get("email")?.value;
     if (email) {
       this.authService.forgotPassword(email).subscribe({
         next: () => {
-          alert('Password reset instructions have been sent to your email.');
+          alert("Password reset instructions have been sent to your email.");
         },
         error: () => {
-          alert('Failed to send password reset email. Please try again.');
-        }
+          alert("Failed to send password reset email. Please try again.");
+        },
       });
     } else {
-      alert('Please enter your email address first.');
+      alert("Please enter your email address first.");
     }
   }
 
@@ -255,8 +263,8 @@ export class LoginComponent {
 
   fillDemoCredentials() {
     this.loginForm.patchValue({
-      email: 'demo@flipkart.com',
-      password: 'demo123'
+      email: "demo@flipkart.com",
+      password: "demo123",
     });
   }
 }

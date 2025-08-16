@@ -1,5 +1,5 @@
-import { Injectable, signal } from '@angular/core';
-import { Observable, of, delay, throwError } from 'rxjs';
+import { Injectable, signal } from "@angular/core";
+import { Observable, of, delay, throwError } from "rxjs";
 
 export interface User {
   id: string;
@@ -22,7 +22,7 @@ export interface SignupData {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class AuthService {
   private currentUser = signal<User | null>(null);
@@ -42,19 +42,23 @@ export class AuthService {
     return new Promise<User>((resolve, reject) => {
       setTimeout(() => {
         // Mock validation
-        if (credentials.email === 'demo@flipkart.com' && credentials.password === 'demo123') {
+        if (
+          credentials.email === "demo@flipkart.com" &&
+          credentials.password === "demo123"
+        ) {
           const user: User = {
-            id: '1',
+            id: "1",
             email: credentials.email,
-            name: 'Demo User',
-            phone: '+91 9876543210',
-            avatar: 'https://ui-avatars.com/api/?name=Demo+User&background=2874f0&color=fff'
+            name: "Demo User",
+            phone: "+91 9876543210",
+            avatar:
+              "https://ui-avatars.com/api/?name=Demo+User&background=2874f0&color=fff",
           };
-          
+
           this.setCurrentUser(user);
           resolve(user);
         } else {
-          reject(new Error('Invalid email or password'));
+          reject(new Error("Invalid email or password"));
         }
       }, 1000);
     }) as any;
@@ -71,13 +75,13 @@ export class AuthService {
             email: signupData.email,
             name: signupData.name,
             phone: signupData.phone,
-            avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(signupData.name)}&background=2874f0&color=fff`
+            avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(signupData.name)}&background=2874f0&color=fff`,
           };
-          
+
           this.setCurrentUser(user);
           resolve(user);
         } else {
-          reject(new Error('Please fill in all required fields'));
+          reject(new Error("Please fill in all required fields"));
         }
       }, 1000);
     }) as any;
@@ -102,42 +106,42 @@ export class AuthService {
 
   private saveUserToStorage(user: User): void {
     try {
-      localStorage.setItem('flipkart_user', JSON.stringify(user));
-      localStorage.setItem('flipkart_logged_in', 'true');
+      localStorage.setItem("flipkart_user", JSON.stringify(user));
+      localStorage.setItem("flipkart_logged_in", "true");
     } catch (error) {
-      console.error('Error saving user to localStorage:', error);
+      console.error("Error saving user to localStorage:", error);
     }
   }
 
   private loadUserFromStorage(): void {
     try {
-      const savedUser = localStorage.getItem('flipkart_user');
-      const isLoggedIn = localStorage.getItem('flipkart_logged_in') === 'true';
-      
+      const savedUser = localStorage.getItem("flipkart_user");
+      const isLoggedIn = localStorage.getItem("flipkart_logged_in") === "true";
+
       if (savedUser && isLoggedIn) {
         const user: User = JSON.parse(savedUser);
         this.currentUser.set(user);
         this.isLoggedIn.set(true);
       }
     } catch (error) {
-      console.error('Error loading user from localStorage:', error);
+      console.error("Error loading user from localStorage:", error);
       this.logout();
     }
   }
 
   private removeUserFromStorage(): void {
     try {
-      localStorage.removeItem('flipkart_user');
-      localStorage.removeItem('flipkart_logged_in');
+      localStorage.removeItem("flipkart_user");
+      localStorage.removeItem("flipkart_logged_in");
     } catch (error) {
-      console.error('Error removing user from localStorage:', error);
+      console.error("Error removing user from localStorage:", error);
     }
   }
 
   // Helper methods
   getUserDisplayName(): string {
     const user = this.currentUser();
-    return user ? user.name : 'Guest';
+    return user ? user.name : "Guest";
   }
 
   isAuthenticated(): boolean {
