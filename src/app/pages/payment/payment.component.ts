@@ -7,7 +7,7 @@ import { CartService } from '../../services/cart.service';
 @Component({
   selector: 'app-payment',
   standalone: true,
-  imports: [CommonModule, RouterLink, ReactiveFormsModule],
+  imports: [CommonModule, RouterLink, ReactiveFormsModule, FormsModule],
   template: `
     <div class="min-h-screen bg-gray-50">
       <div class="container-custom py-6">
