@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 import { RouterLink, RouterLinkActive, Router } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 import { ProductService } from "../../services/product.service";
+import { CartService } from "../../services/cart.service";
 import { Category } from "../../models/product.model";
 
 @Component({
@@ -236,12 +237,13 @@ import { Category } from "../../models/product.model";
 })
 export class HeaderComponent {
   private productService = inject(ProductService);
+  private cartService = inject(CartService);
   private router = inject(Router);
 
   searchQuery = signal("");
   showMoreMenu = signal(false);
   categories = signal<Category[]>([]);
-  cartCount = signal(3); // Mock cart count
+  cartCount = this.cartService.itemCount;
   wishlistCount = signal(5); // Mock wishlist count
 
   constructor() {
