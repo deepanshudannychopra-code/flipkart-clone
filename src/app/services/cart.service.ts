@@ -54,6 +54,9 @@ export class CartService {
     }
 
     this.saveCartToStorage();
+
+    // Show toaster notification
+    this.toasterService.productAdded(product.title, quantity);
   }
 
   removeFromCart(productId: string): void {
