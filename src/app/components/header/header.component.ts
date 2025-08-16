@@ -4,6 +4,7 @@ import { RouterLink, RouterLinkActive, Router } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 import { ProductService } from "../../services/product.service";
 import { CartService } from "../../services/cart.service";
+import { AuthService } from "../../services/auth.service";
 import { Category } from "../../models/product.model";
 
 @Component({
@@ -238,6 +239,7 @@ import { Category } from "../../models/product.model";
 export class HeaderComponent {
   private productService = inject(ProductService);
   private cartService = inject(CartService);
+  private authService = inject(AuthService);
   private router = inject(Router);
 
   searchQuery = signal("");
@@ -245,6 +247,7 @@ export class HeaderComponent {
   categories = signal<Category[]>([]);
   cartCount = this.cartService.itemCount;
   wishlistCount = signal(5); // Mock wishlist count
+  showUserMenu = signal(false);
 
   constructor() {
     this.loadCategories();
