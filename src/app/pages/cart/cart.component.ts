@@ -233,14 +233,14 @@ import { CartItem } from "../../models/product.model";
                     >
                   </div>
 
-                  @if (cartService.getTotalSavings() > 0) {
+                  @if (cartService.totalSavings() > 0) {
                     <div
                       class="flex justify-between text-sm text-flipkart-green"
                     >
                       <span>Savings</span>
                       <span
                         >-₹{{
-                          formatPrice(cartService.getTotalSavings())
+                          formatPrice(cartService.totalSavings())
                         }}</span
                       >
                     </div>
