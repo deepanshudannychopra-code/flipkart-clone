@@ -68,7 +68,7 @@ export class AuthService {
 
   signup(signupData: SignupData): Observable<User> {
     // Simulate API call with delay
-    return new Promise<User>((resolve, reject) => {
+    const promise = new Promise<User>((resolve, reject) => {
       setTimeout(() => {
         // Mock validation
         if (signupData.email && signupData.password && signupData.name) {
@@ -86,7 +86,9 @@ export class AuthService {
           reject(new Error("Please fill in all required fields"));
         }
       }, 1000);
-    }) as any;
+    });
+
+    return from(promise);
   }
 
   logout(): void {
