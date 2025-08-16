@@ -110,7 +110,7 @@ import { Category } from '../../models/product.model';
             <!-- More Menu -->
             <div class="relative">
               <button 
-                (click)="showMoreMenu = !showMoreMenu"
+                (click)="showMoreMenu.set(!showMoreMenu())"
                 class="flex items-center space-x-1 text-gray-700 hover:text-flipkart-blue"
               >
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -119,7 +119,7 @@ import { Category } from '../../models/product.model';
                 <span>More</span>
               </button>
               
-              @if (showMoreMenu) {
+              @if (showMoreMenu()) {
                 <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border z-50">
                   <div class="py-1">
                     <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Profile</a>
