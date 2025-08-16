@@ -61,6 +61,14 @@ export const routes: Routes = [
     component: CartComponent
   },
   {
+    path: "login",
+    component: LoginComponent
+  },
+  {
+    path: "signup",
+    component: SignupComponent
+  },
+  {
     path: "wishlist",
     component: PlaceholderComponent,
     data: {
