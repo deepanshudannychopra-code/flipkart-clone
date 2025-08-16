@@ -39,7 +39,7 @@ export class AuthService {
 
   login(credentials: LoginCredentials): Observable<User> {
     // Simulate API call with delay
-    return new Promise<User>((resolve, reject) => {
+    const promise = new Promise<User>((resolve, reject) => {
       setTimeout(() => {
         // Mock validation
         if (
@@ -61,7 +61,9 @@ export class AuthService {
           reject(new Error("Invalid email or password"));
         }
       }, 1000);
-    }) as any;
+    });
+
+    return from(promise);
   }
 
   signup(signupData: SignupData): Observable<User> {
