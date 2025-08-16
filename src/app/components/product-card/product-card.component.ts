@@ -1,7 +1,8 @@
-import { Component, Input, signal } from "@angular/core";
+import { Component, Input, signal, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterLink } from "@angular/router";
 import { Product } from "../../models/product.model";
+import { CartService } from "../../services/cart.service";
 
 @Component({
   selector: "app-product-card",
@@ -172,6 +173,7 @@ import { Product } from "../../models/product.model";
 })
 export class ProductCardComponent {
   @Input({ required: true }) product!: Product;
+  private cartService = inject(CartService);
 
   private wishlistItems = signal<string[]>(["2", "5"]); // Mock wishlist items
 
@@ -204,8 +206,7 @@ export class ProductCardComponent {
     event.preventDefault();
 
     if (this.product.inStock) {
-      console.log("Added to cart:", this.product.title);
-      // TODO: Implement cart service
+      this.cartService.addToCart(this.product);
     }
   }
 
