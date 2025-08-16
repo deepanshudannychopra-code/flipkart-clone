@@ -61,11 +61,17 @@ export class CartService {
 
   removeFromCart(productId: string): void {
     const currentItems = this.cartItems();
+    const itemToRemove = currentItems.find((item) => item.product.id === productId);
     const updatedItems = currentItems.filter(
       (item) => item.product.id !== productId,
     );
     this.cartItems.set(updatedItems);
     this.saveCartToStorage();
+
+    // Show toaster notification
+    if (itemToRemove) {
+      this.toasterService.productRemoved(itemToRemove.product.title);
+    }
   }
 
   updateQuantity(productId: string, quantity: number): void {
