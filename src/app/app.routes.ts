@@ -87,18 +87,11 @@ export const routes: Routes = [
   },
   {
     path: "checkout",
-    component: PlaceholderComponent,
-    data: {
-      title: "Checkout",
-      description:
-        "Complete your purchase with secure payment options and fast delivery.",
-      icon: "💳",
-      suggestions: [
-        { title: "Cart", icon: "🛒", link: "/cart" },
-        { title: "Continue Shopping", icon: "🛍️", link: "/" },
-        { title: "Track Orders", icon: "📦", link: "/orders" },
-      ],
-    },
+    component: CheckoutComponent
+  },
+  {
+    path: "payment",
+    component: PaymentComponent
   },
   {
     path: "deals",
