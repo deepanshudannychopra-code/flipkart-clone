@@ -1,10 +1,12 @@
-import { Injectable, signal, computed } from "@angular/core";
+import { Injectable, signal, computed, inject } from "@angular/core";
 import { Product, CartItem } from "../models/product.model";
+import { ToasterService } from "./toaster.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class CartService {
+  private toasterService = inject(ToasterService);
   private cartItems = signal<CartItem[]>([]);
 
   // Computed properties
