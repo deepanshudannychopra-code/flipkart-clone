@@ -56,18 +56,7 @@ export const routes: Routes = [
   },
   {
     path: "cart",
-    component: PlaceholderComponent,
-    data: {
-      title: "Shopping Cart",
-      description:
-        "Review your selected items, update quantities, and proceed to checkout.",
-      icon: "🛒",
-      suggestions: [
-        { title: "Continue Shopping", icon: "🛍️", link: "/" },
-        { title: "Wishlist", icon: "❤️", link: "/wishlist" },
-        { title: "Checkout", icon: "💳", link: "/checkout" },
-      ],
-    },
+    component: CartComponent
   },
   {
     path: "wishlist",
