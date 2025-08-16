@@ -1,6 +1,6 @@
 import { Component, signal, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { RouterLink, RouterLinkActive } from "@angular/router";
+import { RouterLink, RouterLinkActive, Router } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 import { ProductService } from "../../services/product.service";
 import { Category } from "../../models/product.model";
@@ -236,6 +236,7 @@ import { Category } from "../../models/product.model";
 })
 export class HeaderComponent {
   private productService = inject(ProductService);
+  private router = inject(Router);
 
   searchQuery = signal("");
   showMoreMenu = signal(false);
@@ -256,9 +257,7 @@ export class HeaderComponent {
   onSearch() {
     const query = this.searchQuery();
     if (query.trim()) {
-      // Navigate to search results page
-      console.log("Searching for:", query);
-      // TODO: Implement navigation to search results
+      this.router.navigate(['/search'], { queryParams: { q: query } });
     }
   }
 }
