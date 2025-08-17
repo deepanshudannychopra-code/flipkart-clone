@@ -569,28 +569,28 @@ export class CheckoutComponent {
       next: (success) => {
         if (success) {
           this.toasterService.success(
-            'Order Confirmed!',
+            "Order Confirmed!",
             `Order #${emailData.orderId} has been placed successfully. Confirmation email sent to ${emailData.customerEmail}`,
             {
-              label: 'View Orders',
+              label: "View Orders",
               handler: () => {
-                this.router.navigate(['/orders']);
-              }
-            }
+                this.router.navigate(["/orders"]);
+              },
+            },
           );
         } else {
           this.toasterService.warning(
-            'Order Placed!',
-            `Order #${emailData.orderId} confirmed, but email delivery failed. Check your orders page for details.`
+            "Order Placed!",
+            `Order #${emailData.orderId} confirmed, but email delivery failed. Check your orders page for details.`,
           );
         }
       },
       error: () => {
         this.toasterService.warning(
-          'Order Placed!',
-          'Your order has been confirmed, but we couldn\'t send the confirmation email. Check your orders page for details.'
+          "Order Placed!",
+          "Your order has been confirmed, but we couldn't send the confirmation email. Check your orders page for details.",
         );
-      }
+      },
     });
 
     // Clear cart

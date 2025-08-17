@@ -1,8 +1,8 @@
-import { Injectable, inject } from '@angular/core';
-import { Observable, from, of } from 'rxjs';
-import { AuthService } from './auth.service';
-import { CartService } from './cart.service';
-import { LocationService } from './location.service';
+import { Injectable, inject } from "@angular/core";
+import { Observable, from, of } from "rxjs";
+import { AuthService } from "./auth.service";
+import { CartService } from "./cart.service";
+import { LocationService } from "./location.service";
 
 export interface OrderConfirmationData {
   orderId: string;
@@ -17,7 +17,7 @@ export interface OrderConfirmationData {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class EmailService {
   private authService = inject(AuthService);
@@ -26,10 +26,10 @@ export class EmailService {
 
   // EmailJS configuration - In production, these should be environment variables
   private readonly emailConfig = {
-    serviceId: 'flipkart_service', // You'll need to configure this in EmailJS
-    templateId: 'order_confirmation',
-    publicKey: 'your_emailjs_public_key', // You'll need to get this from EmailJS
-    isEnabled: false // Set to true when EmailJS is configured
+    serviceId: "flipkart_service", // You'll need to configure this in EmailJS
+    templateId: "order_confirmation",
+    publicKey: "your_emailjs_public_key", // You'll need to get this from EmailJS
+    isEnabled: false, // Set to true when EmailJS is configured
   };
 
   constructor() {
@@ -37,7 +37,9 @@ export class EmailService {
     // For demo purposes, we'll simulate the email functionality
   }
 
-  sendOrderConfirmationEmail(orderData: OrderConfirmationData): Observable<boolean> {
+  sendOrderConfirmationEmail(
+    orderData: OrderConfirmationData,
+  ): Observable<boolean> {
     if (this.emailConfig.isEnabled) {
       return this.sendViaEmailJS(orderData);
     } else {
@@ -45,10 +47,12 @@ export class EmailService {
     }
   }
 
-  private sendViaEmailJS(orderData: OrderConfirmationData): Observable<boolean> {
+  private sendViaEmailJS(
+    orderData: OrderConfirmationData,
+  ): Observable<boolean> {
     // This would use the actual EmailJS SDK
     // emailjs.send(serviceId, templateId, templateParams, publicKey)
-    
+
     const templateParams = {
       to_email: orderData.customerEmail,
       to_name: orderData.customerName,
@@ -59,7 +63,7 @@ export class EmailService {
       delivery_address: this.formatAddress(orderData.deliveryAddress),
       payment_method: orderData.paymentMethod,
       items_list: this.formatItemsList(orderData.items),
-      items_count: orderData.items.length
+      items_count: orderData.items.length,
     };
 
     // Simulate EmailJS call
@@ -70,31 +74,33 @@ export class EmailService {
           // emailjs.send(this.emailConfig.serviceId, this.emailConfig.templateId, templateParams, this.emailConfig.publicKey)
           //   .then(() => resolve(true))
           //   .catch(() => reject(false));
-          
-          console.log('EmailJS would send:', templateParams);
+
+          console.log("EmailJS would send:", templateParams);
           resolve(true);
         }, 1500);
-      })
+      }),
     );
   }
 
-  private simulateEmailSending(orderData: OrderConfirmationData): Observable<boolean> {
+  private simulateEmailSending(
+    orderData: OrderConfirmationData,
+  ): Observable<boolean> {
     // Simulate email sending with a delay
     return from(
       new Promise<boolean>((resolve) => {
         setTimeout(() => {
           // Log the email content for demonstration
-          console.log('📧 ORDER CONFIRMATION EMAIL SENT');
-          console.log('=================================');
+          console.log("📧 ORDER CONFIRMATION EMAIL SENT");
+          console.log("=================================");
           console.log(`To: ${orderData.customerEmail}`);
           console.log(`Subject: Order Confirmation - #${orderData.orderId}`);
-          console.log('');
+          console.log("");
           console.log(this.generateEmailContent(orderData));
-          console.log('=================================');
-          
+          console.log("=================================");
+
           resolve(true);
         }, 1500);
-      })
+      }),
     );
   }
 
@@ -130,9 +136,12 @@ Team Flipkart
   }
 
   private formatItemsList(items: any[]): string {
-    return items.map(item => 
-      `• ${item.product.title} - Qty: ${item.quantity} - ₹${this.formatPrice(item.product.price * item.quantity)}`
-    ).join('\n');
+    return items
+      .map(
+        (item) =>
+          `• ${item.product.title} - Qty: ${item.quantity} - ₹${this.formatPrice(item.product.price * item.quantity)}`,
+      )
+      .join("\n");
   }
 
   private formatAddress(address: any): string {
@@ -143,7 +152,7 @@ Phone: ${address.phone}`;
   }
 
   private formatPrice(price: number): string {
-    return price.toLocaleString('en-IN');
+    return price.toLocaleString("en-IN");
   }
 
   // Method to prepare order confirmation data
@@ -156,22 +165,23 @@ Phone: ${address.phone}`;
 
     return {
       orderId: this.generateOrderId(),
-      customerName: orderData.address.fullName || user?.name || 'Valued Customer',
-      customerEmail: user?.email || 'customer@example.com',
+      customerName:
+        orderData.address.fullName || user?.name || "Valued Customer",
+      customerEmail: user?.email || "customer@example.com",
       items: orderData.items || this.cartService.items(),
       totalAmount: orderData.totalAmount || this.cartService.getTotalAmount(),
       deliveryAddress: orderData.address,
-      paymentMethod: orderData.paymentMethod || 'Cash on Delivery',
-      orderDate: orderDate.toLocaleDateString('en-IN', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric'
+      paymentMethod: orderData.paymentMethod || "Cash on Delivery",
+      orderDate: orderDate.toLocaleDateString("en-IN", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
       }),
-      estimatedDelivery: estimatedDelivery.toLocaleDateString('en-IN', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric'
-      })
+      estimatedDelivery: estimatedDelivery.toLocaleDateString("en-IN", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      }),
     };
   }
 
@@ -182,34 +192,38 @@ Phone: ${address.phone}`;
   }
 
   // Method to send order status update emails
-  sendOrderStatusEmail(orderId: string, status: string, customerEmail: string): Observable<boolean> {
+  sendOrderStatusEmail(
+    orderId: string,
+    status: string,
+    customerEmail: string,
+  ): Observable<boolean> {
     const emailData = {
       to_email: customerEmail,
       order_id: orderId,
       status: status,
-      status_message: this.getStatusMessage(status)
+      status_message: this.getStatusMessage(status),
     };
 
     return this.simulateEmailSending({
       orderId,
       customerEmail,
-      customerName: 'Valued Customer',
+      customerName: "Valued Customer",
       items: [],
       totalAmount: 0,
       deliveryAddress: {},
-      paymentMethod: '',
+      paymentMethod: "",
       orderDate: new Date().toLocaleDateString(),
-      estimatedDelivery: ''
+      estimatedDelivery: "",
     });
   }
 
   private getStatusMessage(status: string): string {
     const messages: { [key: string]: string } = {
-      'confirmed': 'Your order has been confirmed and is being processed.',
-      'shipped': 'Your order has been shipped and is on its way to you.',
-      'delivered': 'Your order has been successfully delivered.',
-      'cancelled': 'Your order has been cancelled as requested.'
+      confirmed: "Your order has been confirmed and is being processed.",
+      shipped: "Your order has been shipped and is on its way to you.",
+      delivered: "Your order has been successfully delivered.",
+      cancelled: "Your order has been cancelled as requested.",
     };
-    return messages[status] || 'Your order status has been updated.';
+    return messages[status] || "Your order status has been updated.";
   }
 }
