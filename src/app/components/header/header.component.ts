@@ -12,7 +12,13 @@ import { Category } from "../../models/product.model";
 @Component({
   selector: "app-header",
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive, FormsModule, LocationPickerComponent],
+  imports: [
+    CommonModule,
+    RouterLink,
+    RouterLinkActive,
+    FormsModule,
+    LocationPickerComponent,
+  ],
   template: `
     <!-- Top Header -->
     <div class="bg-flipkart-blue text-white">
