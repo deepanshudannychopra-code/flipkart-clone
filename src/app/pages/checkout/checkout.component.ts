@@ -282,7 +282,7 @@ import { ToasterService } from "../../services/toaster.service";
                       class="form-radio text-flipkart-blue"
                     />
                     <span class="ml-3 flex items-center">
-                      <span class="text-2xl mr-2">📱</span>
+                      <span class="text-2xl mr-2">����</span>
                       <div>
                         <div class="font-medium">UPI</div>
                         <div class="text-sm text-gray-500">
@@ -561,13 +561,44 @@ export class CheckoutComponent {
     // Save order (in real app, this would be an API call)
     console.log("Order placed:", orderData);
 
+    // Prepare email confirmation data
+    const emailData = this.emailService.prepareOrderConfirmationData(orderData);
+
+    // Send order confirmation email
+    this.emailService.sendOrderConfirmationEmail(emailData).subscribe({
+      next: (success) => {
+        if (success) {
+          this.toasterService.success(
+            'Order Confirmed!',
+            `Order #${emailData.orderId} has been placed successfully. Confirmation email sent to ${emailData.customerEmail}`,
+            {
+              label: 'View Orders',
+              handler: () => {
+                this.router.navigate(['/orders']);
+              }
+            }
+          );
+        } else {
+          this.toasterService.warning(
+            'Order Placed!',
+            `Order #${emailData.orderId} confirmed, but email delivery failed. Check your orders page for details.`
+          );
+        }
+      },
+      error: () => {
+        this.toasterService.warning(
+          'Order Placed!',
+          'Your order has been confirmed, but we couldn\'t send the confirmation email. Check your orders page for details.'
+        );
+      }
+    });
+
     // Clear cart
     this.cartService.clearCart();
 
-    // Redirect to success page (we'll create this)
-    alert(
-      "Order placed successfully! You will receive a confirmation email shortly.",
-    );
-    this.router.navigate(["/"]);
+    // Redirect to home page
+    setTimeout(() => {
+      this.router.navigate(["/"]);
+    }, 3000); // Give time for user to see the toast
   }
 }
