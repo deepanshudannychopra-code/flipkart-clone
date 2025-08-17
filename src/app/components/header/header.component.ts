@@ -27,7 +27,13 @@ import { Category } from "../../models/product.model";
                   clip-rule="evenodd"
                 />
               </svg>
-              Deliver to: <strong class="ml-1">Mumbai 400001</strong>
+              Deliver to:
+              <button
+                (click)="showLocationPicker.set(true)"
+                class="ml-1 font-bold hover:underline focus:outline-none"
+              >
+                {{ locationService.location().displayName }}
+              </button>
             </span>
           </div>
           <div class="flex items-center space-x-6">
