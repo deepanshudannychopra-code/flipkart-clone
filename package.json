@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node --openssl-legacy-provider --no-deprecation ./node_modules/@angular/cli/bin/ng serve --host 0.0.0.0 --disable-host-check --poll=2000",
+    "start": "node --openssl-legacy-provider --no-deprecation ./node_modules/@angular/cli/bin/ng serve --host 0.0.0.0 --poll=2000",
     "build": "node --openssl-legacy-provider --no-deprecation ./node_modules/@angular/cli/bin/ng build",
     "watch": "node --openssl-legacy-provider --no-deprecation ./node_modules/@angular/cli/bin/ng build --watch --configuration development",
     "test": "node --openssl-legacy-provider --no-deprecation ./node_modules/@angular/cli/bin/ng test"
@@ -39,16 +39,12 @@
     "@tailwindcss/typography": "^0.5.16",
     "@types/jasmine": "~5.1.0",
     "autoprefixer": "^10.4.21",
-    "buffer": "^6.0.3",
-    "crypto-browserify": "^3.12.1",
     "jasmine-core": "~5.8.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "process": "^0.11.10",
-    "stream-browserify": "^3.0.0",
     "typescript": "~5.8.2"
   }
 }
