@@ -480,6 +480,8 @@ import { ToasterService } from "../../services/toaster.service";
 export class CheckoutComponent {
   cartService = inject(CartService);
   authService = inject(AuthService);
+  private emailService = inject(EmailService);
+  private toasterService = inject(ToasterService);
   private router = inject(Router);
   private fb = inject(FormBuilder);
 
