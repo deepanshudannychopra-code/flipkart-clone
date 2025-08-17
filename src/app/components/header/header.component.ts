@@ -314,6 +314,7 @@ export class HeaderComponent {
   private productService = inject(ProductService);
   private cartService = inject(CartService);
   authService = inject(AuthService);
+  locationService = inject(LocationService);
   private router = inject(Router);
 
   searchQuery = signal("");
@@ -322,6 +323,7 @@ export class HeaderComponent {
   cartCount = this.cartService.itemCount;
   wishlistCount = signal(5); // Mock wishlist count
   showUserMenu = signal(false);
+  showLocationPicker = signal(false);
 
   constructor() {
     this.loadCategories();
