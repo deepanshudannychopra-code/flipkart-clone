@@ -293,6 +293,14 @@ import { Category } from "../../models/product.model";
         </div>
       </div>
     </div>
+
+    <!-- Location Picker Modal -->
+    @if (showLocationPicker()) {
+      <app-location-picker
+        (close)="showLocationPicker.set(false)"
+        (locationSelected)="onLocationSelected($event)"
+      ></app-location-picker>
+    }
   `,
   styles: [
     `
