@@ -10,6 +10,8 @@ import {
 } from "@angular/forms";
 import { CartService } from "../../services/cart.service";
 import { AuthService } from "../../services/auth.service";
+import { EmailService } from "../../services/email.service";
+import { ToasterService } from "../../services/toaster.service";
 
 @Component({
   selector: "app-checkout",
