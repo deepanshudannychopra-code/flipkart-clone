@@ -347,4 +347,9 @@ export class HeaderComponent {
     this.showUserMenu.set(false);
     this.router.navigate(["/"]);
   }
+
+  onLocationSelected(location: any) {
+    this.showLocationPicker.set(false);
+    // Location is already set in the service
+  }
 }
