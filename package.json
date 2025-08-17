@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node --openssl-legacy-provider ./node_modules/@angular/cli/bin/ng serve --host 0.0.0.0",
-    "build": "node --openssl-legacy-provider ./node_modules/@angular/cli/bin/ng build",
-    "watch": "node --openssl-legacy-provider ./node_modules/@angular/cli/bin/ng build --watch --configuration development",
-    "test": "node --openssl-legacy-provider ./node_modules/@angular/cli/bin/ng test"
+    "start": "node --openssl-legacy-provider --no-deprecation ./node_modules/@angular/cli/bin/ng serve --host 0.0.0.0 --disable-host-check --poll=2000",
+    "build": "node --openssl-legacy-provider --no-deprecation ./node_modules/@angular/cli/bin/ng build",
+    "watch": "node --openssl-legacy-provider --no-deprecation ./node_modules/@angular/cli/bin/ng build --watch --configuration development",
+    "test": "node --openssl-legacy-provider --no-deprecation ./node_modules/@angular/cli/bin/ng test"
   },
   "prettier": {
     "overrides": [
