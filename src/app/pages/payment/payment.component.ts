@@ -9,6 +9,8 @@ import {
   FormsModule,
 } from "@angular/forms";
 import { CartService } from "../../services/cart.service";
+import { EmailService } from "../../services/email.service";
+import { ToasterService } from "../../services/toaster.service";
 
 @Component({
   selector: "app-payment",
