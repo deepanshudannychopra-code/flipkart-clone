@@ -453,6 +453,8 @@ import { ToasterService } from "../../services/toaster.service";
 })
 export class PaymentComponent implements OnInit {
   private cartService = inject(CartService);
+  private emailService = inject(EmailService);
+  private toasterService = inject(ToasterService);
   private router = inject(Router);
   private fb = inject(FormBuilder);
 
